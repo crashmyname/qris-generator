@@ -1,0 +1,9 @@
+<?php
+$baseDir = realpath(__DIR__.'/');
+define('BPJS_BASE_PATH',$baseDir);
+require_once $baseDir.'/vendor/autoload.php';
+require_once $baseDir.'/app/helpers/helper.php';
+use Helpers\Bpjs;
+
+$cli = new Bpjs();
+$cli->run($argv);

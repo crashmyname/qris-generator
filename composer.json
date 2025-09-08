@@ -1,0 +1,30 @@
+{
+    "name": "bpjs/bpjs",
+    "description": "Sebuah Framework untuk PHP",
+    "type": "project",
+    "require": {
+        "php" : "^8.0",
+        "firebase/php-jwt": "^6.10",
+        "fadli-dev/wilayah-id": "^1.0",
+        "phpmailer/phpmailer": "^6.9",
+        "phpoffice/phpspreadsheet": "^3.4",
+        "chillerlan/php-qrcode": "^5.0"
+    },
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "App\\": "app/",
+            "Config\\": "config/",
+            "Helpers\\": "app/helpers/",
+            "Bpjs\\Core\\":"src/Core/",
+            "Middlewares\\":"app/Middleware/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Fadli Azka Prayogi",
+            "email": "fadliazkaprayogi1@gmail.com"
+        }
+    ],
+    "minimum-stability": "stable"
+}

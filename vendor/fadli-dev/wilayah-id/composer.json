@@ -1,0 +1,19 @@
+{
+    "name": "fadli-dev/wilayah-id",
+    "description": "Library untuk memanggil data wilayah indonesia",
+    "type": "library",
+    "autoload": {
+        "psr-4": {
+            "Region\\WilayahID\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Fadli Azka Prayogi",
+            "email": "fadliazkaprayogi1@gmail.com"
+        }
+    ],
+    "minimum-stability": "stable",
+    "require": {
+    }
+}
