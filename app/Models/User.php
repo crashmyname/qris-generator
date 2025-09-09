@@ -7,5 +7,5 @@ class User extends BaseModel {
     
     // Protected table Users
     public $table = 'users';
-    protected $primaryKey = 'users_id';
+    protected $primaryKey = 'userId';
 }

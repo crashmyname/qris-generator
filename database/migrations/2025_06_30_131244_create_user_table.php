@@ -11,7 +11,7 @@ class CreateUserTable
         $table = new SchemaBuilder('users');
         $table->id('userId');
         $table->string('nama',150);
-        $table->string('email',150);
+        $table->string('username',150);
         $table->string('password');
         $table->timestamp('created_at')->default('CURRENT_TIMESTAMP');
         $table->timestamp('updated_at')->default('CURRENT_TIMESTAMP');
