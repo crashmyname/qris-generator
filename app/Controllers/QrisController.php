@@ -120,36 +120,43 @@ class QrisController extends BaseController
             ]);
         }
         if($request->file('image')){
-            $tmpPath = $request->file('image')['tmp_name'];
-            $qrcode = new QrReader($tmpPath);
-            $qrisData = $qrcode->text();
-
-            if($qrisData){
-                $parsed = $this->parseTLV($qrisData);
-                $mapping = $this->mapSimplified($parsed);
-                $dbqris = Qris::create([
-                    'userId' => Session::user()->userId,
-                    'merchantvendor' => $mapping['merchantVid'],
-                    'merchantid' => $mapping['merchantId'],
-                    'merchantcriteria' => $mapping['merchantCriteria'],
-                    'merchanttype' => $mapping['merchantType'],
-                    'merchantcategory' => $mapping['merchantCategory'],
-                    'merchantcurrency' => $mapping['currency'],
-                    'countryid' => $mapping['country'],
-                    'merchantname' => $mapping['merchantName'],
-                    'merchantcity' => $mapping['merchantCity'],
-                    'merchantpostalcode' => $mapping['postalCode'],
-                ]);
-                return Response::json([
-                    'status' => 200,
-                    'message' => 'success',
-                    'parser' => $parsed,
-                    'data' => $mapping
-                ]);
-            } else {
+            try{
+                $tmpPath = $request->file('image')['tmp_name'];
+                $qrcode = new QrReader($tmpPath);
+                $qrisData = $qrcode->text();
+                if($qrisData){
+                    $parsed = $this->parseTLV($qrisData);
+                    $mapping = $this->mapSimplified($parsed);
+                    $dbqris = Qris::create([
+                        'userId' => Session::user()->userId,
+                        'merchantvendor' => $mapping['merchantVid'],
+                        'merchantid' => $mapping['merchantId'],
+                        'merchantcriteria' => $mapping['merchantCriteria'],
+                        'merchanttype' => $mapping['merchantType'],
+                        'merchantcategory' => $mapping['merchantCategory'],
+                        'merchantcurrency' => $mapping['currency'],
+                        'countryid' => $mapping['country'],
+                        'merchantname' => $mapping['merchantName'],
+                        'merchantcity' => $mapping['merchantCity'],
+                        'merchantpostalcode' => $mapping['postalCode'],
+                    ]);
+                    return Response::json([
+                        'status' => 200,
+                        'message' => 'success',
+                        'parser' => $parsed,
+                        'data' => $mapping
+                    ]);
+                } else {
+                    return Response::json([
+                        'status' => 500,
+                        'message' => 'error',
+                    ]);
+                }
+            } catch(\Exception $e){
                 return Response::json([
                     'status' => 500,
-                    'message' => 'error',
+                    'message' => $e->getMessage(),
+                    'trace' => $e->getTraceAsString(),
                 ]);
             }
         }
