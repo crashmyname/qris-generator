@@ -72,7 +72,10 @@
                       please fill in your password
                     </div>
                   </div>
-
+                  <div class="form-group">
+                    <img src="<?= url('captcha')?>" alt="captcha" style="cursor:pointer;" id="captchaImage">
+                    <input type="text" name="captcha" class="form-control col-md-5" placeholder="Masukkan captcha">
+                  </div>
                   <div class="form-group">
                     <button type="submit" class="btn btn-primary btn-lg btn-block" tabindex="4" id="btnregister">
                       Register
@@ -100,6 +103,11 @@
     </section>
   </div>
   <script>
+    function regenerateCaptcha() {
+        let captcha = document.getElementById("captchaImage");
+        captcha.src = "<?= url('captcha')?>"
+    }
+    document.getElementById("captchaImage").addEventListener("click", regenerateCaptcha);
     $(document).ready(function(){
         $('#btnregister').on('click', function(e){
             e.preventDefault();
@@ -151,12 +159,16 @@
                                 icon: 'error',
                                 title: 'Error',
                                 text: errmes.trim()
-                            })
+                            }).then((result)=>{
+                              regenerateCaptcha()
+                            });
                     } else {
                         Swal.fire({
                             icon: 'error',
                             title: 'Register Gagal',
                             text: response.message
+                        }).then((result)=>{
+                          regenerateCaptcha()
                         });
                     }
                 },

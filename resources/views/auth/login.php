@@ -72,7 +72,10 @@
                       please fill in your password
                     </div>
                   </div>
-
+                  <div class="form-group">
+                    <img src="<?= url('captcha')?>" alt="captcha" id="captchaImage">
+                    <input type="text" name="captcha" class="form-control col-md-5" placeholder="Masukkan captcha">
+                  </div>
                   <div class="form-group">
                     <button type="submit" class="btn btn-primary btn-lg btn-block" tabindex="4" id="btnlogin">
                       Login
@@ -103,6 +106,11 @@
     </section>
   </div>
   <script>
+    function regenerateCaptcha() {
+        let captcha = document.getElementById("captchaImage");
+        captcha.src = "<?= url('captcha')?>"
+    }
+    document.getElementById("captchaImage").addEventListener("click", regenerateCaptcha);
     $(document).ready(function(){
         $('#btnlogin').on('click', function(e){
             e.preventDefault();
@@ -142,6 +150,8 @@
                             icon: 'error',
                             title: 'Login Gagal',
                             text: response.message
+                        }).then((result)=>{
+                          regenerateCaptcha()
                         });
                     }
                 },
@@ -150,6 +160,8 @@
                         icon: 'error',
                         title: 'Oops...',
                         text: 'Terjadi kesalahan pada server!'
+                    }).then((result)=>{
+                      regenerateCaptcha()
                     });
                 },
                 complete: function () {

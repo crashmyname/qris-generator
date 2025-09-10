@@ -18,6 +18,7 @@ Route::get('/login', function(){
 Route::get('/register', function(){
     return view('auth/register');
 });
+Route::get('/captcha',[AuthController::class, 'captcha']);
 Route::post('/register',[AuthController::class, 'register']);
 Route::group([AuthMiddleware::class],function(){
     Route::get('/home', function(){
