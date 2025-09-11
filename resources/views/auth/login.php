@@ -187,7 +187,7 @@
   <!-- Page Specific JS File -->
   
   <!-- Template JS File -->
-  <script src="<?= asset('stisla-1-2.2.0/dist/assets/js/scripts.js') ?>"></script>
+    <script src="<?= asset('stisla-1-2.2.0/dist/assets/js/scripts.js') ?>"></script>
     <script src="<?= asset('stisla-1-2.2.0/dist/assets/js/custom.js') ?>"></script>
 </body>
 </html>
